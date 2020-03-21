@@ -13,7 +13,7 @@ trait TimestampJsonProtocol extends DefaultJsonProtocol {
         
         private val parserISO: format.DateTimeFormatter = ISODateTimeFormat.dateTimeNoMillis()
         
-        override def write(obj: DateTime) = JsString(parserISO.print(obj))
+        override def write(obj: DateTime): JsValue = JsString(parserISO.print(obj))
         
         override def read(json: JsValue): DateTime = json match {
             case JsString(s) => parserISO.parseDateTime(s)
