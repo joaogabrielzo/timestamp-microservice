@@ -5,7 +5,7 @@ import org.joda.time._
 import org.joda.time.format._
 import spray.json._
 
-case class Timestamp(unix: Long, datetime: DateTime)
+case class Timestamp(unix: String, datetime: DateTime)
 
 trait TimestampJsonProtocol extends DefaultJsonProtocol {
     
@@ -37,12 +37,12 @@ class TimestampActor extends Actor with ActorLogging {
     override def receive: Receive = {
         case Now                     =>
             log.info("Fetching the current Date and Time.")
-            sender() ! Timestamp(DateTime.now().getMillis, DateTime.now())
+            sender() ! Timestamp(DateTime.now().getMillis.toString.slice(0, 10), DateTime.now())
         case ConvertToUnix(date)     =>
             log.info("Converting Date to Unix timestamp.")
-            sender() ! Timestamp(date.getMillis, date.toDateTime)
+            sender() ! Timestamp(date.getMillis.toString.slice(0, 10), date.toDateTime)
         case ConvertToDateTime(unix) =>
             log.info("Converting Unix timestamp to DateTime.")
-            sender() ! Timestamp(unix, new DateTime(unix * 1000))
+            sender() ! Timestamp(unix.toString, new DateTime(unix * 1000))
     }
 }

@@ -18,7 +18,7 @@ class TimestampMicroserviceSpec extends AnyWordSpec
             Get("/api/timestamp/1443785500") ~> timestampRoute ~> check {
                 status shouldBe StatusCodes.OK
                 
-                responseAs[Timestamp] shouldBe Timestamp(1443785500, new DateTime(1443785500 * 1000L))
+                responseAs[Timestamp] shouldBe Timestamp("1443785500", new DateTime(1443785500 * 1000L))
             }
         }
         
@@ -26,7 +26,7 @@ class TimestampMicroserviceSpec extends AnyWordSpec
             Get("/api/timestamp/2018-03-25") ~> timestampRoute ~> check {
                 status shouldBe StatusCodes.OK
                 
-                responseAs[Timestamp] shouldBe Timestamp(1521946800000L, new DateTime(1521946800 * 1000L))
+                responseAs[Timestamp] shouldBe Timestamp("1521946800", new DateTime(1521946800 * 1000L))
             }
         }
     }
