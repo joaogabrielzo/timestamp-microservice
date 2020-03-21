@@ -29,5 +29,18 @@ http GET localhost:9999/api/timestamp/2020-03-21
 
 {"datetime":"2020-03-21T00:00:00-03:00","unix":"1584759600"}
 ```
+## Run With Docker
 
-
+To run with docker, you should first build the image.  
+  
+Inside the project's folder, run in terminal:
+```
+docker build . -t timestamp-microservice
+```  
+  
+After the image is done building, run in terminal:
+```
+docker run --network=host timestamp-microservice
+```  
+  
+You can then access the API via `localhost:9999/api/timestamp/`
